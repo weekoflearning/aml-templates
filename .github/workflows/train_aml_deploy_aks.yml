@@ -1,0 +1,61 @@
+# name: train on aml compute and deploy on aks : template workflow
+# on: [push]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check Out Repository
+#         id: checkout_repository
+#         uses: actions/checkout@master
+    
+#       # connect to existing workspace or create new
+#       - name: Create Workspace
+#         id: aml_ws
+#         uses: Azure/aml-workspace@v1
+#         with:
+#           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#           parameters_file: "workspace.json"
+
+#       # connect to existing compute or create new
+#       - name: Connect to Compute
+#         id: aml_compute
+#         uses: Azure/aml-compute@v1
+#         with:
+#             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#             parameters_file: "aml_compute.json"
+
+#       # connect to existing compute or create new for aks
+#       - name: Connect to Compute
+#         id: aml_compute
+#         uses: Azure/aml-compute@v1
+#         with:
+#             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#             parameters_file: "aks_compute.json"
+
+#       # do training
+#       - name: Train model
+#         id: aml_train
+#         uses: Azure/aml-run@v1
+#         with:
+#             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#             parameters_file: "run.json"
+
+#       # do registration of model
+#       - name: register model
+#         id: aml_register
+#         uses: Azure/aml-registermodel@v1
+#         with:
+#             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#             run_id: ${{ steps.aml_train.output.run_id}}
+#             experiment_name: ${{ steps.aml_train.output.experiment_name}}
+#             parameters_file: "registermodel.json"
+
+#       # do deployment of model
+#       - name: deploy model
+#         id: aml_deploy
+#         uses: Azure/aml-deploy@v1
+#         with:
+#             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+#             model_name: ${{ steps.aml_register.output.model_name }}
+#             model_version: ${{ steps.aml_register.output.model_version }}
+#             parameters_file: "aks_deploy.json"
