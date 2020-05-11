@@ -89,22 +89,14 @@ The log outputs of your action will provide URLs for you to view the resources t
 
 | File/folder                   | Description                                |
 | ----------------------------- | ------------------------------------------ |
-| `code`                        | Sample data science source code that will be submitted to Azure Machine Learning to train and deploy machine learning models. |
-| `code/train`                  | Sample code that is required for training a model on Azure Machine Learning. |
-| `code/train/train.py`         | Training script that gets executed on a cluster on Azure Machine Learning. |
-| `code/train/environment.yml`  | Conda environment specification, which describes the dependencies of `train.py`. These packages will be installed inside a Docker image on the Azure Machine Learning compute cluster, when executing your `train.py`. |
-| `code/train/run_config.yml`   | YAML files, which describes the execution of your training run on Azure Machine Learning. This file also references your `environment.yml`. Please look at the comments in the file for more details. |
-| `code/deploy`                 | Sample code that is required for deploying a model on Azure Machine Learning. |
-| `code/deploy/score.py`        | Inference script that is used to build a Docker image and that gets executed within the container when you send data to the deployed model on Azure Machine Learning. |
-| `code/deploy/environment.yml` | Conda environment specification, which describes the dependencies of `score.py`. These packages will be installed inside the Docker image that will be used for deploying your model. |
-| `code/test/test.py`           | Test script that can be used for testing your deployed webservice. Add a `deploy.json` to the `.cloud/.azure` folder and add the following code `{ "test_enabled": true }` to enable tests of your webservice. Change the code according to the tests that zou would like to execute. |
-| `.cloud/.azure`               | Configuration files for the Azure Machine Learning GitHub Actions. Please visit the repositories of the respective actions and read the documentation for more details. |
-| `.github/workflows`           | Folder for GitHub workflows. The `train_deploy.yml` sample workflow shows you how your can use the Azure Machine Learning GitHub Actions to automate the machine learning process. |
-| `docs`                        | Resources for this README.                 |
-| `CODE_OF_CONDUCT.md`          | Microsoft Open Source Code of Conduct.     |
-| `LICENSE`                     | The license for the sample.                |
-| `README.md`                   | This README file.                          |
-| `SECURITY.md`                 | Microsoft Security README.                 |
+| `.cloud/.azure/workspace.json`                        | file containing the workspace information to use for machine learning. |
+| `.cloud/.azure/aml_compute.json`                  | file containing the aml compute information to use for machine learning. |
+| `.cloud/.azure/aks_compute.json`         | file containing the aml compute information to use for machine learning. |
+| `.cloud/.azure/run.json`         | file containing the training run information to use for machine learning. |
+| `.cloud/.azure/registermodel.json`         | file containing the registring information to register a model to azure machine learning. |
+| `.cloud/.azure/aci_deploy.json`         | file containing the deployment configuration to deploy a model to ACI on azure machine learning. |
+| `.cloud/.azure/aks_deploy.json`         | file containing the deployment configuration to deploy a model to AKS on azure machine learning. |
+
 
 ## Documentation of Azure Machine Learning GitHub Actions
 
